@@ -53,7 +53,7 @@ public class EleveController {
             tags = { "Eleve" })
     public ResponseEntity<?> getEleve(@PathVariable("idEleve") final Integer id) {
         Eleve eleve = eleveService.getEleve(id)
-                .orElseThrow(() -> new RessourceNotFoundException("Impossible de trouver l'eleve " + id + "."));
+                .orElseThrow(() -> new RessourceNotFoundException("Impossible de trouver l'eleve %s.".formatted(id)));
 
         if (eleve != null) {
             return ResponseEntity.ok(eleveAssembler.toModel(eleve));

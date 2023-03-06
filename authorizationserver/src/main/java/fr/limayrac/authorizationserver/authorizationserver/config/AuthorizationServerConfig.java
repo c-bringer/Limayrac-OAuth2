@@ -51,25 +51,22 @@ public class AuthorizationServerConfig {
         return new InMemoryRegisteredClientRepository(registeredClient);
     }
 
+    /*
+     * -----------------
+     * Default Endpoints
+     * -----------------
+     *
+     * Authorization Endpoint             /oauth2/authorize
+     * Token Endpoint                     /oauth2/token
+     * Token Revocation                   /oauth/revoke
+     * Token Introspection                /oauth/introspect
+     * JWK Set Endpoint                   /oauth/jwks
+     * Authorization Server Metadata      /.well-known/oauth-authorization-server
+     * OIDC Provider Configuration        /.well-know/openid-configuration
+     */
     @Bean
     @Order(Ordered.HIGHEST_PRECEDENCE)
     public SecurityFilterChain authServerSecurityFilterChain(HttpSecurity http) throws Exception {
-
-        /*
-         *
-         * -----------------
-         * Default Endpoints
-         * -----------------
-         *
-         * Authorization Endpoint             /oauth2/authorize
-         * Token Endpoint                     /oauth2/token
-         * Token Revocation                   /oauth/revoke
-         * Token Introspection                /oauth/introspect
-         * JWK Set Endpoint                   /oauth/jwks
-         * Authorization Server Metadata      /.well-known/oauth-authorization-server
-         * OIDC Provider Configuration        /.well-know/openid-configuration
-         *
-         */
         OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
         return http.formLogin(Customizer.withDefaults()).build();
     }
